@@ -643,8 +643,8 @@
     //------------------------------------------------------
     function validateIDNOAndCUIIO() {
         // Retrieve the IDNO and CUIIO values from the form
-        var IDNO = jQuery('#dec_fiscCod_fiscal').val();
-        var CUIIO = jQuery('#dec_fiscCod_cuiio').val();
+        var IDNO = jQuery('#dec_fiscCod_fiscal').val().trim();
+        var CUIIO = jQuery('#dec_fiscCod_cuiio').val().trim();
 
         // List of IDNO and CUIIO from the provided file (manually inserted here)
         var idnoCuiioList = [
