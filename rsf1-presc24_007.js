@@ -643,13 +643,13 @@
     //------------------------------------------------------
     function validateIDNOAndCUIIO() {
         // Retrieve the IDNO and CUIIO values from the form
-        var IDNO = jQuery('#dec_fiscCod_fiscal').val();
-        var CUIIO = jQuery('#dec_fiscCod_cuiio').val();
+        var IDNO = jQuery('#dec_fiscCod_fiscal').val().trim();
+        var CUIIO = jQuery('#dec_fiscCod_cuiio').val().trim();
 
         // List of IDNO and CUIIO from the provided file (manually inserted here)
         var idnoCuiioList = [
 
-            { IDNO: "1234567890123", CUIIO: "22222222" },
+           
             { IDNO: "030140002252", CUIIO: "39083611" },
             { IDNO: "1002600000087", CUIIO: "38619682" },
             { IDNO: "1002600000102", CUIIO: "40001202" },
@@ -8197,7 +8197,9 @@
 
         // Check if both IDNO and CUIIO match any entry in the list
         var match = idnoCuiioList.some(function (entry) {
-            return entry.IDNO === IDNO && entry.CUIIO === CUIIO; 
+            return entry.CUIIO === CUIIO; 
+            //entry.IDNO === IDNO && 
+            
         });
 
         if (match) {
@@ -8206,7 +8208,7 @@
                 fieldName: 'dec_fiscCod_fiscal',
                 index: 0,
                 weight: 1,
-                msg: `Cod eroare: RF3-086 -  Unitatea statistică trebuie să prezinte raportul RSF 1. IDNO: ${IDNO}, CUIIO: ${CUIIO}`
+                msg: `Cod eroare: RF3-086 -  Unitatea trebuie să prezinte raportul RSF1.`
             });
         }
     }
