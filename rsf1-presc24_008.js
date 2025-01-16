@@ -89,7 +89,7 @@
 
         var fieldError = validateFieldNoHieroglyphs('Entitatea', values.dec_fiscCod_name);
         if (fieldError) {
-            webform.errors.push({
+            webform.warnings.push({
                 'fieldName': fieldError.fieldName,
                 'index': 0,
                 'weight': 10,
