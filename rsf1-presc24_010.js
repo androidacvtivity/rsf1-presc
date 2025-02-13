@@ -81,6 +81,43 @@
         }
     };
 
+    function validateSpecialIDNOAndCUIIO() {
+        var values = Drupal.settings.mywebform.values;
+
+        var IDNO = values.dec_fiscCod_fiscal.trim();
+        var CUIIO = values.dec_fiscCod_cuiio.trim();
+
+        var isSpecialCase = (IDNO === "1002600014905" && CUIIO === "37369421");
+
+        if (isSpecialCase) {
+            var startPeriod = values.dec_period_from.split(".");
+            var endPeriod = values.dec_period_to.split(".");
+
+            var allowedStartDate = new Date(2023, 6, 1);  // 01.07.2023
+            var allowedEndDate = new Date(2024, 5, 30);   // 30.06.2024
+
+            var startDate = new Date(parseInt(startPeriod[2]), parseInt(startPeriod[1]) - 1, parseInt(startPeriod[0]));
+            var endDate = new Date(parseInt(endPeriod[2]), parseInt(endPeriod[1]) - 1, parseInt(endPeriod[0]));
+
+            if (startDate < allowedStartDate || endDate > allowedEndDate) {
+                webform.errors.push({
+                    'fieldName': 'dec_period_from',
+                    'index': 0,
+                    'weight': 4,
+                    'msg': concatMessage('RF3-004-M', '', Drupal.t('Perioada selectată nu este permisă pentru acest IDNO și CUIIO')),
+                });
+
+                webform.errors.push({
+                    'fieldName': 'dec_period_to',
+                    'index': 0,
+                    'weight': 5,
+                    'msg': concatMessage('RF3-005-M', '', Drupal.t('Perioada selectată nu este permisă pentru acest IDNO și CUIIO')),
+                });
+            }
+        }
+    }
+
+
     webform.validators.validate_rsf1_presc_1 = function () {
         var values = Drupal.settings.mywebform.values;
 
@@ -111,6 +148,8 @@
             });
         }
 // --------------------------------------------------------------------
+
+        validateSpecialIDNOAndCUIIO();
         var currentDate = new Date();
         var lastYear = new Date().getFullYear() - 1;
         var plusDays = isLeap(new Date().getFullYear()) ? 121 : 120;
@@ -151,9 +190,24 @@
         }
 
 
+// ------------------------------------------------------------------------------
 
 
-        if (parseInt(startPeriod[2]) < lastYear) {
+        var IDNO = jQuery('#dec_fiscCod_fiscal').val().trim();
+        var CUIIO = jQuery('#dec_fiscCod_cuiio').val().trim();
+        
+        
+        var idnoCuiioList = [ {
+            IDNO: "1002600014905", CUIIO: "37369421"},
+        ];
+
+        // Check if both IDNO and CUIIO match any entry in the list
+        var match = idnoCuiioList.some(function (entry) {
+            return entry.CUIIO === CUIIO && entry.IDNO === IDNO; 
+
+        });
+
+        if (parseInt(startPeriod[2]) < lastYear && !match) {
             webform.errors.push({
                 'fieldName': 'dec_period_from',
                 'index': 0,
@@ -164,7 +218,7 @@
             var periodToStr = endPeriod[2] + '-' + endPeriod[1] + '-' + endPeriod[0];
             var periodFromStr = startPeriod[2] + '-' + startPeriod[1] + '-' + startPeriod[0];
 
-            if (periodFromStr > periodToStr) {
+            if (periodFromStr > periodToStr && !match) {
                 webform.errors.push({
                     'fieldName': 'dec_period_from',
                     'index': 0,
@@ -174,7 +228,7 @@
             }
         }
 
-        if (endPeriod.length == 3) {
+        if (endPeriod.length == 3 && !match) {
             var periodToStr = endPeriod[2] + '-' + endPeriod[1] + '-' + endPeriod[0];
             var comparedDateStr = lastYear + '-12-31';
             if ((values.dec_lichidare && periodToStr >= comparedDateStr) || (!values.dec_lichidare && periodToStr != comparedDateStr)) {
@@ -188,7 +242,7 @@
         }
 
 
-
+//--------------------------------------------------------------------------------------------
 
 
 
