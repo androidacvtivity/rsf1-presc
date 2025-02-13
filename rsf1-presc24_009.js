@@ -151,9 +151,24 @@
         }
 
 
+// ------------------------------------------------------------------------------
 
 
-        if (parseInt(startPeriod[2]) < lastYear) {
+        var IDNO = jQuery('#dec_fiscCod_fiscal').val().trim();
+        var CUIIO = jQuery('#dec_fiscCod_cuiio').val().trim();
+        
+        
+        var idnoCuiioList = [ {
+            IDNO: "1234567890123", CUIIO: "88888888"},
+        ];
+
+        // Check if both IDNO and CUIIO match any entry in the list
+        var match = idnoCuiioList.some(function (entry) {
+            return entry.CUIIO === CUIIO && entry.IDNO === IDNO; 
+
+        });
+
+        if (parseInt(startPeriod[2]) < lastYear && !match) {
             webform.errors.push({
                 'fieldName': 'dec_period_from',
                 'index': 0,
@@ -164,7 +179,7 @@
             var periodToStr = endPeriod[2] + '-' + endPeriod[1] + '-' + endPeriod[0];
             var periodFromStr = startPeriod[2] + '-' + startPeriod[1] + '-' + startPeriod[0];
 
-            if (periodFromStr > periodToStr) {
+            if (periodFromStr > periodToStr && !match) {
                 webform.errors.push({
                     'fieldName': 'dec_period_from',
                     'index': 0,
@@ -174,7 +189,7 @@
             }
         }
 
-        if (endPeriod.length == 3) {
+        if (endPeriod.length == 3 && !match) {
             var periodToStr = endPeriod[2] + '-' + endPeriod[1] + '-' + endPeriod[0];
             var comparedDateStr = lastYear + '-12-31';
             if ((values.dec_lichidare && periodToStr >= comparedDateStr) || (!values.dec_lichidare && periodToStr != comparedDateStr)) {
@@ -188,7 +203,7 @@
         }
 
 
-
+//--------------------------------------------------------------------------------------------
 
 
 
