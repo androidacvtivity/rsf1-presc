@@ -149,7 +149,7 @@
         }
 // --------------------------------------------------------------------
 
-        validateSpecialIDNOAndCUIIO();
+        //validateSpecialIDNOAndCUIIO();
         var currentDate = new Date();
         var lastYear = new Date().getFullYear() - 1;
         var plusDays = isLeap(new Date().getFullYear()) ? 121 : 120;
