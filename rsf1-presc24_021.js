@@ -281,6 +281,10 @@
             if (endPeriod.length == 3) {
                 var periodToStr = endPeriod[2] + '-' + endPeriod[1] + '-' + endPeriod[0];
                 var comparedDateStr = lastYear + '-12-31';
+
+                //Daca periodToStr nu este intre 01.01.Anul curecnt si 30.12.Anul curent
+                //Acum eu modicia contidia - periodToStr >= comparedDateStr cu periodToStr nu este intre 01.01.Anul curecnt si 30.12.Anul curent
+
                 if ((values.dec_lichidare && periodToStr >= comparedDateStr) || (!values.dec_lichidare && periodToStr != comparedDateStr)) {
                     webform.errors.push({
                         'fieldName': 'dec_period_to',
