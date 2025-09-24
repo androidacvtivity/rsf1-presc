@@ -194,7 +194,7 @@
 
 
         // Check if both IDNO and CUIIO match any entry in the list
-        var match = isTaxpayerInExceptionList();
+        // var match = isTaxpayerInExceptionList();
 
         if (!match) {
             if (parseInt(startPeriod[2]) < lastYear) {
