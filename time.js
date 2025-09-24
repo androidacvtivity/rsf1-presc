@@ -96,3 +96,5 @@ if (endPeriod.length == 3 && !match) {
 
 
 //--------------------------------------------------------------------------------------------
+
+// Daca de lichidare este  bifat si anult de raporttare pana la 31.12.2025 - Sa treaca 
