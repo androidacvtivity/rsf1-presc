@@ -98,3 +98,12 @@ if (endPeriod.length == 3 && !match) {
 //--------------------------------------------------------------------------------------------
 
 // Daca de lichidare este  bifat si anult de raporttare pana la 31.12.2025 - Sa treaca 
+
+
+//B092425 rsf1 - presc Modificare js - rsf1 - presc24_022.js
+
+Buna ziua, Cristina.
+Cand aveti uamratorul Deploy - noi avem o modificare pentru RSF Prescurtat.BunaAm creat si branch-ul rsf1-presc24_022 pentru aceasta modificare. 
+Va rog sa il folositi pentru Deploy.
+Multumesc!
+C    
