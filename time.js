@@ -102,8 +102,10 @@ if (endPeriod.length == 3 && !match) {
 
 //B092425 rsf1 - presc Modificare js - rsf1 - presc24_022.js
 
-Buna ziua, Cristina.
-Cand aveti uamratorul Deploy - noi avem o modificare pentru RSF Prescurtat.BunaAm creat si branch-ul rsf1-presc24_022 pentru aceasta modificare. 
-Va rog sa il folositi pentru Deploy.
-Multumesc!
-C    
+// Buna ziua, Cristina.
+// Cand aveti uamratorul Deploy - noi avem o modificare pentru RSF Prescurtat.BunaAm creat si branch-ul rsf1-presc24_022 pentru aceasta modificare. 
+// Va rog sa il folositi pentru Deploy.
+// Multumesc!
+
+
+// B101625 rsf1 - presc Modificare js - rsf1 - presc24_023.js
