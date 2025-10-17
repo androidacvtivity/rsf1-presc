@@ -282,7 +282,7 @@
                 var periodToStr = endPeriod[2] + '-' + endPeriod[1] + '-' + endPeriod[0];   // YYYY-MM-DD
                 var comparedDateStr = lastYear + '-12-31';                                   // 31.12.(anul trecut)
 
-                // ✨ Nou: fereastră valabilă pentru lichidare = [01.01.(an curent) .. 30.12.(an curent)], inclusiv
+                //  Nou: fereastră valabilă pentru lichidare = [01.01.(an curent) .. 30.12.(an curent)], inclusiv
                 var currentYear = new Date().getFullYear();
                 var curStartStr = currentYear + '-01-01';
                 var curEndStr = currentYear + '-12-30';
