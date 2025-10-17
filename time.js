@@ -109,3 +109,5 @@ if (endPeriod.length == 3 && !match) {
 
 
 // B101625 rsf1 - presc Modificare js - rsf1 - presc24_023.js
+
+//SELECT code, CONCAT(code, ' - ', name) FROM taxonomy_term_data t JOIN classifier_76 c ON c.tid = t.tid WHERE(code NOT BETWEEN 7001 AND 7055) AND(code NOT BETWEEN 8001 AND 8060) ORDER BY code
