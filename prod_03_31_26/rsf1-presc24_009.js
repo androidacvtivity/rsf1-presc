@@ -112,7 +112,6 @@
         }
 
         var currentDate = new Date();
-        var currentlastYear = currentDate.getFullYear();
         var lastYear = new Date().getFullYear() - 1;
         var plusDays = isLeap(new Date().getFullYear()) ? 121 : 120;
         var validDate = new Date(lastYear, 11, 31 + plusDays, 23, 59, 59); // lastYear/12/31 + 120 || 121 days
@@ -174,7 +173,7 @@
 
         if (endPeriod.length == 3) {
             var periodToStr = endPeriod[2] + '-' + endPeriod[1] + '-' + endPeriod[0];
-            var comparedDateStr = currentlastYear + '-12-31';
+            var comparedDateStr = lastYear + '-12-31';
             if ((values.dec_lichidare && periodToStr >= comparedDateStr) || (!values.dec_lichidare && periodToStr != comparedDateStr)) {
                 webform.errors.push({
                     'fieldName': 'dec_period_to',
@@ -8236,7 +8235,6 @@
             { IDNO: "1002600005369", CUIIO: "38569903" },
         ];
 
-
         // Check if both IDNO and CUIIO match any entry in the list
         var match = idnoCuiioList.some(function (entry) {
             return entry.CUIIO === CUIIO;
@@ -8258,4 +8256,4 @@
 
     //-----------------------------------------------------
     //------------------------------------------------------
-})(jQuery);;
+})(jQuery);
