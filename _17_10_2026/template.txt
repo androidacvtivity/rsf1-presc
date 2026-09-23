@@ -1,0 +1,13 @@
+
+Acum raportul RSFPrescurtat - din nou pe productie nu este eroare dar pe test este 
+
+
+Uncaught ReferenceError: rsf1_presc_entities_medium_micro is not defined
+    detectMediumMicroEntity https://edecbns-test.sfs.md/files/webforms/rsf1-presc26_002.js?tj8k8a:8268
+    validate_rsf1_presc_1 https://edecbns-test.sfs.md/files/webforms/rsf1-presc26_002.js?tj8k8a:104
+    <anonymous> https://edecbns-test.sfs.md/sites/all/modules/edeclaratii/mywebform/js/validation.js?tj8k8a:461
+ 
+rsf1-presc26_002.js:8268:26
+    detectMediumMicroEntity https://edecbns-test.sfs.md/files/webforms/rsf1-presc26_002.js?tj8k8a:8268
+    validate_rsf1_presc_1 https://edecbns-test.sfs.md/files/webforms/rsf1-presc26_002.js?tj8k8a:104
+    <anonymous> https://edecbns-test.sfs.md/sites/all/modules/edeclaratii/mywebform/js/validation.js?tj8k8a:461
