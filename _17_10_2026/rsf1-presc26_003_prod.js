@@ -8266,7 +8266,10 @@
     function detectMediumMicroEntity() {
         const idno = Drupal.settings.mywebform.values.dec_fiscCod_fiscal;
         
-        const entities = rsf1_presc_entities_medium_micro ? Object.values(rsf1_presc_entities_medium_micro) : [];
+     //   const entities = rsf1_presc_entities_medium_micro ? Object.values(rsf1_presc_entities_medium_micro) : [];
+        const entities = typeof rsf1_presc_entities_medium_micro !== 'undefined'
+            ? Object.values(rsf1_presc_entities_medium_micro)
+            : [];
 
         _isEntityMediumMicro = entities.some(
             record => record?.idno === idno
