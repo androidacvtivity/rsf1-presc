@@ -123,19 +123,97 @@
         var validEndPeriod = new Date(endPeriod[2], parseInt(endPeriod[1]) - 1, parseInt(endPeriod[0]) + plusDays, 23, 59, 59);
         const nalogPeriodYear = Drupal.settings.mywebform.values.nalogPeriodYear;
 
+        // Modifica 1. data curenta este intre 01.08.2026 si 31.12.2026 in 1. data curenta este intre 01.08 si 31.12 - anului curect 
         
-        
-        if (Drupal.settings.declarations.declarations_submission_deadline_rsf1_presc) {
-            var erObj002 = {
+        /*
+         * Exceptie temporara pentru rapoartele de lichidare:
+         * 1. data curenta este intre 01.08.2026 si 31.12.2026;
+         * 2. dec_lichidare este bifat;
+         * 3. dec_period_from = 01.01.2026;
+         * 4. dec_period_to nu este mai mare decat data curenta.
+         *
+         * Daca toate conditiile sunt indeplinite, RF3-002 nu se afiseaza.
+         */
+        var exceptionStartDate = new Date(2026, 7, 1, 0, 0, 0);
+        var exceptionEndDate = new Date(2026, 11, 31, 23, 59, 59);
+
+        if (
+            currentDate >= exceptionStartDate &&
+            currentDate <= exceptionEndDate &&
+            values.dec_lichidare &&
+            startPeriod.length === 3 &&
+            endPeriod.length === 3
+        ) {
+            var periodFromDate = new Date(
+                parseInt(startPeriod[2], 10),
+                parseInt(startPeriod[1], 10) - 1,
+                parseInt(startPeriod[0], 10),
+                0,
+                0,
+                0
+            );
+
+            var periodToDate = new Date(
+                parseInt(endPeriod[2], 10),
+                parseInt(endPeriod[1], 10) - 1,
+                parseInt(endPeriod[0], 10),
+                0,
+                0,
+                0
+            );
+
+            var requiredStartDate = new Date(2026, 0, 1, 0, 0, 0);
+
+            // Comparam doar data calendaristica pentru dec_period_to.
+            var currentDay = new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                currentDate.getDate(),
+                0,
+                0,
+                0
+            );
+
+            // dec_period_to nu trebuie sa fie mai mare decat data curenta.
+            if (periodToDate > currentDay) {
+                webform.errors.push({
+                    'fieldName': 'dec_period_to',
+                    'index': 0,
+                    'weight': 2,
+                    'msg': concatMessage(
+                        'RF3-002',
+                        '',
+                        Drupal.t('Data selectată nu trebuie să fie mai mare decât data curentă')
+                    ),
+                });
+            } else if (
+                periodFromDate.getTime() === requiredStartDate.getTime() &&
+                periodToDate <= currentDay
+            ) {
+                // Exceptia este valida: RF3-002 nu se afiseaza.
+            } else if (currentDate > validDate) {
+                webform.errors.push({
+                    'fieldName': 'dec_period_from',
+                    'index': 0,
+                    'weight': 2,
+                    'msg': concatMessage(
+                        'RF3-002',
+                        '',
+                        Drupal.t('Termenul prezentarii Situațiilor financiare a expirat')
+                    ),
+                });
+            }
+        } else if (currentDate > validDate) {
+            webform.errors.push({
+                'fieldName': 'dec_period_from',
                 'index': 0,
                 'weight': 2,
-                'msg': concatMessage('RF3-002', '', Drupal.t('Termenul prezentarii Situațiilor financiare a expirat')),
-            };
-
-            if (currentDate > validDate) {
-                erObj002.fieldName = 'dec_period_from';
-                webform.errors.push(erObj002);
-            }
+                'msg': concatMessage(
+                    'RF3-002',
+                    '',
+                    Drupal.t('Termenul prezentarii Situațiilor financiare a expirat')
+                ),
+            });
         }
 
 
